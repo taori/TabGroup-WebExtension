@@ -1,27 +1,42 @@
 {
 	"background": {
 		"scripts": [
+			"lib/jquery-3.2.1.min.js",
+			"lib/jquery.hotkeys.js",
 			"background.js"
 		]
 	},
-	"browser_action": {
+	"page_action": {
 		"browser_style": true,
-		"default_title": "TabGroups",
-		"default_popup": "tabGroups.html",
-		"theme_icons": [
-			{
-				"dark": "content/ic_tab_black_24px.svg",
-				"light": "content/ic_tab_white_24px.svg",
-				"size": 24
-			}
-		]
+		"default_title": "TabGroups"
 	},
+	"content_scripts": [
+		{
+			"matches": [ "*://*/*" ],
+			"js": [
+				"lib/jquery-3.2.1.min.js",
+				"lib/jquery.hotkeys.js",
+				"lib/jquery-ui-1.12.1.custom/jquery-ui.min.js",
+				"contentscript.js"
+			],
+			"css": [
+				"lib/jquery-ui-1.12.1.custom/jquery-ui.min.css",
+				"lib/jquery-ui-1.12.1.custom/jquery-ui.structure.min.css",
+				"lib/jquery-ui-1.12.1.custom/jquery-ui.theme.min.css"
+			]
+		}
+	],
 	"description": "type 'tg' to use tab group commands.",
+	"icons": {
+		"24": "content/ic_tab_black_24px.svg"
+	},
 	"homepage_url": "https://github.com/taori/TabGroup-WebExtension",
 	"omnibox": { "keyword": "tg" },
 	"manifest_version": 2,
 	"name": "TabGroups",
 	"permissions": [
+		"activeTab",
+		"<all_urls>",
 		"tabs",
 		"storage"
 	],

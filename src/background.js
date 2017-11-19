@@ -68,10 +68,32 @@ async function attachTab(tab) {
 async function detachTab(tab) {
 }
 
+async function pageActionClicked(sender, args) {
+	alert("hi");
+}
+
 browser.tabs.onRemoved.addListener((tab) => {
 	removeTab(tab);
 });
-browser.tabs.onCreated.addListener((tab) => {
+browser.tabs.onCreated.addListener(async (tab) => {
+	
+//	await browser.tabs.insertCSS(tab.id, {
+//		file: "lib/jquery-ui-1.12.1.custom/jquery-ui.min.css"
+//	});
+//	await browser.tabs.insertCSS(tab.id, {
+//		file: "lib/jquery-ui-1.12.1.custom/jquery-ui.structure.min.css"
+//	});
+//	await browser.tabs.insertCSS(tab.id, {
+//		file: "lib/jquery-ui-1.12.1.custom/jquery-ui.min.theme.min.css"
+//	});
+
+//	await browser.tabs.executeScript(tab.id, {
+//		file: "lib/jquery-ui-1.12.1.custom/jquery-ui.min.js"
+//	});
+	await browser.tabs.executeScript(tab.id, {
+		file: "contentscript.js"
+	});
+
 	addTab(tab);
 });
 browser.tabs.onDetached.addListener((tab) => {
